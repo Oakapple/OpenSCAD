@@ -60,7 +60,7 @@ difference() {
     }
 }
 
-//menger(2);
-star(2,$t+0.1);
+menger(2);
+//star(2,$t+0.1);
 
     
