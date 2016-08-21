@@ -19,7 +19,9 @@ module frame (x)
     translate([0,0,x]) rotate (90,[0,1,0])  cylinder (h=x,r=2);
 }
 
-frame(100);
+module main ()
+{
+    frame(100);
 for (i=[5:5:45])
 {
     translate([0,2*i,0])
@@ -28,4 +30,33 @@ for (i=[5:5:45])
         frame (100);
     }
 }
+}
+
+module shaft (number, gap)
+{
+    for (j=[0:number])
+    {
+        for (i=[0:number])
+    {
+        translate ([i*gap,j*gap,0]) {cylinder (h=number*gap,r=2);}
+    }
+}
+}
+
+
+module wirecube (number, gap)
+{
+    offset = -(number*gap)/2;
+    translate ([offset,offset,offset]) {shaft (number,gap);}
+rotate (90,[0,1,0]) translate ([offset,offset,offset]) {shaft (number,gap);}
+rotate (90,[1,0,0]) translate ([offset,offset,offset]) {shaft (number,gap);}
+}
+
+intersection ()
+{
+    wirecube(10,10);
+    sphere (55);
+}
+
+
 
